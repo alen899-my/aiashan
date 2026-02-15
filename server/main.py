@@ -6,7 +6,10 @@ from database import base
 
 # Create tables in Neon automatically
 try:
-    base.Base.metadata.create_all(bind=engine)
+    if engine is not None:
+        base.Base.metadata.create_all(bind=engine)
+    else:
+        print("Database engine not initialized. Skipping table creation.")
 except Exception as e:
     print(f"Error creating database tables: {e}")
 
