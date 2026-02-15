@@ -19,7 +19,8 @@ const Dashboard = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:8000/users/${userId}`, {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const response = await fetch(`${apiUrl}/users/${userId}`, {
           headers: { 'Content-Type': 'application/json' }
         });
 
@@ -62,12 +63,12 @@ const Dashboard = () => {
       const dayNum = match[1];
       const dayName = match[2].trim();
       const exercises = [];
-      
+
       const exerciseMatches = match[3].matchAll(/\+ ([^\n]+)/g);
       for (const ex of exerciseMatches) {
         exercises.push(ex[1].trim());
       }
-      
+
       sections.workoutPlan.push({
         day: dayNum,
         name: dayName,

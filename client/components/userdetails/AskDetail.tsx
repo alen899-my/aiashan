@@ -8,7 +8,7 @@ const AskDetail = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  
+
   // State for all form fields
   const [formData, setFormData] = useState({
     first_name: '',
@@ -40,15 +40,16 @@ const AskDetail = () => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/users/register', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/users/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            ...formData,
-            age: parseInt(formData.age),
-            height: parseFloat(formData.height),
-            weight: parseFloat(formData.weight),
-            frequency: parseInt(formData.frequency)
+          ...formData,
+          age: parseInt(formData.age),
+          height: parseFloat(formData.height),
+          weight: parseFloat(formData.weight),
+          frequency: parseInt(formData.frequency)
         }),
       });
 
@@ -70,8 +71,8 @@ const AskDetail = () => {
 
   if (loading) return (
     <div className="text-center animate-pulse">
-        <h2 className="text-white text-2xl font-black italic">AI ASHAN IS ANALYZING...</h2>
-        <p className="text-primary text-xs tracking-widest mt-2 uppercase">Generating your custom algorithm</p>
+      <h2 className="text-white text-2xl font-black italic">AI ASHAN IS ANALYZING...</h2>
+      <p className="text-primary text-xs tracking-widest mt-2 uppercase">Generating your custom algorithm</p>
     </div>
   );
 
@@ -162,8 +163,8 @@ const AskDetail = () => {
               Back
             </button>
           )}
-          <RedButton 
-            onClick={step === 3 ? handleSubmit : nextStep} 
+          <RedButton
+            onClick={step === 3 ? handleSubmit : nextStep}
             className="flex-1 py-4 text-xs tracking-widest"
           >
             {step === 3 ? (loading ? 'Processing...' : 'Find Ashan') : 'Next'}
