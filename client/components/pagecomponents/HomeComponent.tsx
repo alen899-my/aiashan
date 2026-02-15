@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { RedButton } from '@/components/common/Button'
 
 export const HomeComponent = () => {
@@ -47,9 +48,11 @@ export const HomeComponent = () => {
           </p>
           
           <div className="mt-8 w-full md:w-auto">
-            <RedButton className="w-full md:w-auto py-5 text-lg">
-              Hire Your Ashan
-            </RedButton>
+            <Link href="/requirements" className="w-full block md:inline-block">
+              <RedButton className="w-full md:w-auto py-5 text-lg">
+                Hire Your Ashan
+              </RedButton>
+            </Link>
           </div>
         </div>
       </div>
