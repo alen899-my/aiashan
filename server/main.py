@@ -5,7 +5,11 @@ from database.connection import engine
 from database import base
 
 # Create tables in Neon automatically
-base.Base.metadata.create_all(bind=engine)
+try:
+    base.Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print(f"Error creating database tables: {e}")
+
 
 app = FastAPI(title="AI Ashan")
 
