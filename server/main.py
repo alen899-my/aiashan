@@ -11,7 +11,7 @@ app = FastAPI(title="AI Ashan")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Update this with your frontend URL later
+    allow_origins=["https://aiashan.vercel.app", "http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
